@@ -19,7 +19,7 @@ curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.de
 # Cambiar la ip publica
 sudo EXTERNAL_URL="https://<PUBLIC_IP>" apt-get install gitlab-ce
 ```
-Ejemplo: sudo EXTERNAL_URL="https://34.139.115.253" apt-get install gitlab-ce
+Ejemplo: sudo EXTERNAL_URL="https://34.75.156.69" apt-get install gitlab-ce
 
 ## 2.1. Password:
 ```sh
@@ -125,8 +125,6 @@ git config --global user.email "user@example.com"
 
 git init --initial-branch=main
 ```
-
-
 
 ## 6.2. Clonar y subir el código
 ```sh

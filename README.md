@@ -4,22 +4,19 @@
 - [02. Dashboard](./02.%20Dashboard.md)
 - [03. Seguridad](./03.%20Seguridad.md)
 - [04. Jobs](./04.%20Jobs.md)
+- [05. Connexion GitLab](./05.%20Conexion%20GitLab.md)
+- [06. Pipelines](./06%20Pipelines.md)
 
 
 
-agentes/nodos
 
 
-2
-git repo (Gitlab) - instalacion
-job/proyectos - multibranch pipeline
-Git webhook
+
+3
 build
 docker image
 ACR
-practica
 
-3
 deploy
 VM
 Azure container service
@@ -27,6 +24,9 @@ AKS?
 practica
 
 4
-jenkins k8s?
-gitlab ci?
+agentes/nodos (conceptual) practica?
 proyecto final
+
+jenkins k8s?
+git repo (Gitlab) - instalacion
+gitlab ci?
