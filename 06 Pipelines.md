@@ -22,6 +22,8 @@ pipeline {
 Reiniciar.
 
 # 3. Conexion con GitLab
+Esta conexión permite la comunicación entre aplicaciones (Jenkins y GitLab)
+
 ## 3.1. Crear el Access Token
 En GitLab
 - Edit Profile > Access Tokens
@@ -41,11 +43,15 @@ En GitLab
 - Test Connection: Success
 
 # 4. Crear las credenciales del usuario Jenkins
+Esta conexión permite la comunicación entre un Job y GitLab
+
 ## 4.1. Cambiar la configuración de seguridad
 - manage jenkins > Security: Git Host Key Verification: Accept first connection
 Esto permite aceptar la conexión on la llave SSH
 
 ## 4.2. Agregar las nuevas llaves a GitLab
+- Crear llaves SSh con el usuario jenkins
+- Agregar las llaves a GitLab
 
 # 5. Pipeline
 - Create a job
@@ -58,6 +64,9 @@ Esto permite aceptar la conexión on la llave SSH
   - SCM: Git
   - Repository URL: git@gitlab.com:<USERNAME>/public-api.git
   - Credentials: add SSH
+    - User with ssh
+    - username: jenkins
+    - add private key
 	- Branch: */main
 	- Script Path: Jenkinsfile
 	- Save
@@ -154,6 +163,7 @@ pipeline {
     }
 }
 ```
+- En caso de error revise el log y repare.
 
 ## 5.7. Secrets y Credenciales
 - Manage Jenkins - Credentials - System - Global credentials
@@ -206,37 +216,37 @@ pipeline {
 pipeline {
     agent any
     environment {
-	    name = 'CARLOS'
+        name = 'CARLOS'
     }
     stages {
         stage('Hello') {
             steps {
                 echo 'Hello World'
 
-								// Simula un error en el pipeline
-								 script {
+                // Simula un error en el pipeline
+                script {
                     currentBuild.result = 'FAILURE'
                 }
             }
         }
 
         stage('Var') {
-						when {
-							expression {
-									currentBuild.result == 'SUCCESS'
-							}
-						}
+            when {
+              expression {
+                currentBuild.result == 'SUCCESS'
+              }
+            }
             steps {
                 echo "Hello ${name}"
             }
         }
 
-				stage('Error') {
-						when {
-							expression {
-									currentBuild.result == 'FAILURE'
-							}
-						}
+        stage('Error') {
+            when {
+              expression {
+                  currentBuild.result == 'FAILURE'
+              }
+            }
             steps {
                 echo "NOTIFICA el error"
             }
