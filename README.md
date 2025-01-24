@@ -6,27 +6,7 @@
 - [04. Jobs](./04.%20Jobs.md)
 - [05. Connexion GitLab](./05.%20Conexion%20GitLab.md)
 - [06. Pipelines](./06%20Pipelines.md)
-
-
-
-
-
-
-3
-build
-docker image
-ACR
-
-deploy
-VM
-Azure container service
-AKS?
-practica
-
-4
-agentes/nodos (conceptual) practica?
-proyecto final
-
-jenkins k8s?
-git repo (Gitlab) - instalacion
-gitlab ci?
+- [07. Construccion](./07.%20Build.md)
+- [08. Despliegue](./08.%20Deploy.md)
+- [09. Practica Final](./09.%20Practica%20Final.md)
+- [10. (Opcional) Agentes](./10.%20Agentes.md)

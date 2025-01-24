@@ -1,0 +1,72 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_BRANCH = 'main'
+        GIT_REPO= "git@gitlab.com:carlos.echc11/public-api.git"
+        GIT_CREDENTIALS="jenkins"
+        IMAGE_NAME= "appdemo"
+        REGISTRY_CREDENTIALS="registryCredential"
+        REGISTRY ="jenkins.azurecr.io"
+
+        TENANT="xxxxxxxxxxxxxxxxxx"
+        SUBSCRIPTION="xxxxxxxxxxxxxxxxxxxxxx"
+    }
+
+    stages {
+        stage('Checkout code') {
+            steps {
+                // Obtener codigo de gitlab
+                // git branch: "${GIT_BRANCH}", credentialsId: "$GIT_CREDENTIALS", url:  "${GIT_REPO}"
+
+                // Obtener el hash del commit
+                script {
+                    env.VERSION = sh(returnStdout: true, script: "git rev-parse --short HEAD").trim()
+                    echo "Version: ${VERSION}"
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    echo "Construyendo la imagen, Version: ${VERSION}"
+                    withCredentials([string(credentialsId: 'APP_ENV', variable: 'ENV')]) {
+                      sh "docker build -t $IMAGE_NAME:$VERSION -f qa.dockerfile --build-arg APP_ENV=${ENV} ."
+                    }
+                }
+            }
+        }
+
+        stage('Push') {
+            steps {
+                script {
+                    sh "docker tag ${IMAGE_NAME}:${VERSION} ${REGISTRY}/${IMAGE_NAME}:${VERSION}"
+
+                    docker.withRegistry("https://${REGISTRY}", "${REGISTRY_CREDENTIALS}") {
+                        sh "docker push ${REGISTRY}/${IMAGE_NAME}:${VERSION}"
+                    }
+                }
+            }
+        }
+
+        stage('Login to Azure') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'azcredentials', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
+                      sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant ${TENANT}'
+                      sh 'az account set -s ${SUBSCRIPTION}'
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    sh 'az containerapp update --name app-public-api --resource-group rg-jenkins --image ${REGISTRY}/${IMAGE_NAME}:${VERSION}'
+                }
+            }
+        }
+    }
+}

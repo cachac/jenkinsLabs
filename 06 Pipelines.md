@@ -1,4 +1,4 @@
-# 06 Construcción <!-- omit in toc -->
+# 06 Pipelines <!-- omit in toc -->
 
 # 1. Crear el Jenkins file
 - [Link](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/)
@@ -68,8 +68,8 @@ Esto permite aceptar la conexión on la llave SSH
     - username: jenkins
     - add private key
 	- Branch: */main
-	- Script Path: Jenkinsfile
-	- Save
+- Script Path: Jenkinsfile
+- Save
 
 ## 5.1. Error conocido
 > credentials Failed to connect to repository
@@ -156,8 +156,8 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-              echo "Secret Name: ${env.goblalName}"
-              echo "Secret Name: ${goblalName}"
+              echo "Global Name: ${env.goblalName}"
+              echo "Global Name: ${goblalName}"
             }
         }
     }
@@ -304,7 +304,9 @@ El resultado de sumar <NUMERO 1> + <NUMERO 2> es: <RESULTADO>
 ## 6.7. Crear un nuevo Job (Item) de tipo Pipeline y conectarlo con el Jenkins file creado en el paso 6.1
 
 # 7. Multi-branch
-## 7.1. Eliminar los pipelines anteriores
+## 7.1. (Opcional) Eliminar los pipelines anteriores
+Para evitar ejecuciones por Trigger.
+
 ## 7.2. Agregar el brach dev al proyecto GitLab
 ```sh
 git checkout -b dev
@@ -411,7 +413,8 @@ Construyendo el branch PROD
 ## 8.1. Crear un nuevo proyecto en GitLab
 - Nombre: practica2
 - Crear una nueva carpeta en la VM con el nombre practica2
-- Sincronizar el proyecto con GitLab en la VM con el branch main y stage
+- Sincronizar el proyecto con GitLab en la VM con el branch
+- Crear dos branches: main y stage
 - Agregar el jenkinsfile
   - Para stage, mostrar la resta de dos números
   - Para main, mostrar la multiplicación de dos números
