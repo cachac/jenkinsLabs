@@ -44,6 +44,11 @@ En GitLab
 
 # 4. Crear las credenciales del usuario Jenkins
 Esta conexión permite la comunicación entre un Job y GitLab
+```sh
+sudo su
+su jenkins
+```
+
 
 ## 4.1. Cambiar la configuración de seguridad
 - manage jenkins > Security: Git Host Key Verification: Accept first connection
