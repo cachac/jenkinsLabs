@@ -349,14 +349,15 @@ Cada uno funciona como un Pipeline separado
 - Plugin: Multibranch scan webhook trigger
 - Configure
 - Scan Multibranch Pipeline Triggers: Scan by webhook
-- Trigger Token: gitToken (es un nombre random)
-  - Help: JENKINS_URL/multibranch-webhook-trigger/invoke?token=[Trigger token]
+- Trigger Token: < TOKEN > (es un nombre random)
+  - Help: muestra la configuración que se debe ingresar en GitLab:
+  - EJ: < JENKINS_URL >/multibranch-webhook-trigger/invoke?token=[Trigger token]
 - Save
 
 ### 7.6.1. Crear el webhook en GitLab
 - Public-api > settings - webhook
 - Add new
-  - URL: <JENKINS_URL>/multibranch-webhook-trigger/invoke?token=gitToken
+  - URL: < JENKINS_URL >/multibranch-webhook-trigger/invoke?token=<TOKEN>
   - Name: Jenkins
   - Trigger: Push events
   - Enable SSL verification: false
