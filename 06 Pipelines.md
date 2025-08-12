@@ -357,7 +357,7 @@ Cada uno funciona como un Pipeline separado
 ### 7.6.1. Crear el webhook en GitLab
 - Public-api > settings - webhook
 - Add new
-  - URL: < JENKINS_URL >/multibranch-webhook-trigger/invoke?token=<TOKEN>
+  - URL: < JENKINS_URL >/multibranch-webhook-trigger/invoke?token=< TOKEN >
   - Name: Jenkins
   - Trigger: Push events
   - Enable SSL verification: false
