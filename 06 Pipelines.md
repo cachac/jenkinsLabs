@@ -111,7 +111,7 @@ pipeline {
 
         stage('Var') {
             steps {
-                echo "Hello ${name}"
+                echo "Hello ${name}" // comillas dobles
             }
         }
     }
@@ -126,7 +126,7 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}" // comillas dobles
             }
         }
     }
@@ -156,7 +156,7 @@ pipeline {
 ## 5.6. Variables Globales
 - Manage Jenkins - System - Global properties - Environment Variables
 - Add
-- Name: goblalName
+- Name: GLOBAL_NAME
 - Value: <NOMBRE>
 - Save
 
@@ -166,8 +166,8 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-              echo "Global Name: ${env.goblalName}"
-              echo "Global Name: ${goblalName}"
+              echo "Global Name: ${env.GLOBAL_NAME}"
+              echo "Global Name: ${GLOBAL_NAME}"
             }
         }
     }
