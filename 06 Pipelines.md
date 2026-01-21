@@ -25,13 +25,14 @@ Reiniciar.
 Esta conexión permite la comunicación entre aplicaciones (Jenkins y GitLab)
 
 ## 3.1. Crear el Access Token
-En GitLab
+En GitLab:
 - Edit Profile > Access Tokens
 - Add new
 - name: demo
 - scope: API
 - create
 
+En Jenkins:
 - Manage Jenkins > System > GitLab
 - Connection Name: Demo
 - URL: https://gitlab.com
@@ -47,15 +48,19 @@ Esta conexión permite la comunicación entre un Job y GitLab
 ```sh
 sudo su
 su jenkins
+
+ssh-keygen -q -N "" -C "jenkins@mail.com"
+
+cat /var/lib/jenkins/.ssh/id_ed25519.pub
 ```
 
 
 ## 4.1. Cambiar la configuración de seguridad
 - manage jenkins > Security: Git Host Key Verification: Accept first connection
+
 Esto permite aceptar la conexión on la llave SSH
 
 ## 4.2. Agregar las nuevas llaves a GitLab
-- Crear llaves SSh con el usuario jenkins
 - Agregar las llaves a GitLab
 
 # 5. Pipeline
